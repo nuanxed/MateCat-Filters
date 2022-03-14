@@ -3,9 +3,6 @@ name: Build and push ZombieCat
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
-
 env:
   GCP_PROJECT_ID: nuanxed-platform-lab
   GKE_CLUSTER: nuanxed-platform-lab-gke
