@@ -1,22 +1,22 @@
-name: Build and Deploy ZombieCat
+name: Build and deploy ZombieCat
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 env:
   PROJECT_ID: nuanxed-platform-lab
   GKE_CLUSTER: nuanxed-platform-lab-gke
   GKE_ZONE: europe-west1-b
   DOCKER_REGISTRY: europe-west1-docker.pkg.dev
-  DOCKER_TAG: "$DOCKER_REGISTRY"/"$PROJECT_ID"/docker/zombie-cat:$(date +%s)
+  DOCKER_TAG: $DOCKER_REGISTRY/$PROJECT_ID/docker/zombie-cat:$(date +%s)
 
 jobs:
   deploy:
-    name: Deploy
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -42,4 +42,4 @@ jobs:
         run: docker build . --file Dockerfile --tag "$DOCKER_TAG"
 
       - name: Push Docker image
-      - run: docker push "$DOCKER_TAG"
+        run: docker push "$DOCKER_TAG"
