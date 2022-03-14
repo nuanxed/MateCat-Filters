@@ -1,4 +1,4 @@
-name: Build ZombieCat Docker Image
+name: Build and Deploy ZombieCat
 
 on:
   push:
@@ -6,13 +6,40 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  PROJECT_ID: nuanxed-platform-lab
+  GKE_CLUSTER: nuanxed-platform-lab-gke
+  GKE_ZONE: europe-west1-b
+  DOCKER_REGISTRY: europe-west1-docker.pkg.dev
+  DOCKER_TAG: "$DOCKER_REGISTRY"/"$PROJECT_ID"/docker/zombie-cat:$(date +%s)
+
 jobs:
-
-  build:
-
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-    - name: Build ZombieCat Docker image
-      run: docker build . --file Dockerfile --tag zombie-cat:$(date +%s)
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Authenticate with GCP
+        id: auth
+        uses: google-github-actions/auth@v0
+        with:
+          credentials_json: '${{ secrets.ZC_SA_BUILD_AND_DEPLOY_JSON }}'
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v0
+  
+      - name: Connect to GKE cluster
+        run: |
+          gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+
+      - name: Configure docker
+        run: |
+          gcloud auth configure-docker "$DOCKER_REGISTRY"
+
+      - name: Build Docker image
+        run: docker build . --file Dockerfile --tag "$DOCKER_TAG"
+
+      - name: Push Docker image
+      - run: docker push "$DOCKER_TAG"
