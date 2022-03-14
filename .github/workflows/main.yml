@@ -15,7 +15,7 @@ env:
   DOCKER_IMAGE: zombie-cat
 
 jobs:
-  push:
+  build_and_push:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,9 +39,9 @@ jobs:
         run: |
           gcloud auth configure-docker "$DOCKER_REGISTRY"
 
-        name: Build and push docker image
+      - name: Build and push docker image
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: "$DOCKER_REGISTRY/$GCP_PROJECT_ID/$DOCKER_REPOSITORY/$DOCKER_IMAGE:$(date +%s)"
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ env.GCP_PROJECT_ID }}/${{ env.DOCKER_REPOSITORY }}/${{ env.DOCKER_IMAGE }}:${{ github.sha }}
