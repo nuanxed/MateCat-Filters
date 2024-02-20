@@ -32,12 +32,12 @@ public class DefaultFilter implements IFilter {
     @Override
     public File extract(File sourceFile, Locale sourceLanguage, Locale targetLanguage, String segmentation) {
         Format originalFormat = Format.getFormat(sourceFile);
-        OkapiPack okapiPack = extractOkapiPack(sourceFile, sourceLanguage, targetLanguage, segmentation, null, false);
+        OkapiPack okapiPack = extractOkapiPack(sourceFile, sourceLanguage, targetLanguage, segmentation, null, false, true);
 
         return XliffBuilder.build(okapiPack, originalFormat, this.getClass());
     }
 
-    public static OkapiPack extractOkapiPack(File sourceFile, Locale sourceLanguage, Locale targetLanguage, String segmentation, net.sf.okapi.common.filters.IFilter okapiFilter, Boolean segmentBilingual) {
+    public static OkapiPack extractOkapiPack(File sourceFile, Locale sourceLanguage, Locale targetLanguage, String segmentation, net.sf.okapi.common.filters.IFilter okapiFilter, Boolean segmentBilingual, Boolean useSegmentation) {
         Format originalFormat = Format.getFormat(sourceFile);
 
         // 1. If the file it's not supported, convert it
@@ -53,7 +53,7 @@ public class DefaultFilter implements IFilter {
         Encoding encoding = new EncodingDetectorRouter().detect(sourceFile);
 
         // 3. Send to Okapi
-        return OkapiClient.generatePack(sourceLanguage, targetLanguage, encoding, sourceFile, segmentation, okapiFilter, segmentBilingual);
+        return OkapiClient.generatePack(sourceLanguage, targetLanguage, encoding, sourceFile, segmentation, okapiFilter, segmentBilingual, useSegmentation);
     }
 
     @Override

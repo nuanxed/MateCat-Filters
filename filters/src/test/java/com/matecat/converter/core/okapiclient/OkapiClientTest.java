@@ -10,7 +10,7 @@ public class OkapiClientTest {
 
     private void testFile(String filename) {
         File file = new File(getClass().getResource("/okapi/" + filename).getPath());
-        OkapiPack pack = OkapiClient.generatePack(Locale.ENGLISH, Locale.ENGLISH, Encoding.getDefault(), file, null, null, false);
+        OkapiPack pack = OkapiClient.generatePack(Locale.ENGLISH, Locale.ENGLISH, Encoding.getDefault(), file, null, null, false, true);
         OkapiClient.generateDerivedFile(pack);
         pack.delete();
     }

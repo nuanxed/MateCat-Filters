@@ -55,7 +55,7 @@ public class OkapiClientSegmentationTest {
         tempFile.deleteOnExit();
         FileUtils.writeStringToFile(tempFile, text, forName("UTF-8"));
 
-        OkapiPack pack = OkapiClient.generatePack(Locale.ENGLISH, Locale.ENGLISH, Encoding.getDefault(), tempFile, null, null, false);
+        OkapiPack pack = OkapiClient.generatePack(Locale.ENGLISH, Locale.ENGLISH, Encoding.getDefault(), tempFile, null, null, false, true);
         ArrayList<String> strings = sourceSegs(pack.getXlf());
         pack.delete();
         return strings;
