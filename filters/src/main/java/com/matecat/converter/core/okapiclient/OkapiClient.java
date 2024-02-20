@@ -279,7 +279,7 @@ public class OkapiClient {
      * @param file File
      * @return Okapi's result pack
      */
-    public static OkapiPack generatePack(Locale sourceLanguage, Locale targetLanguage, Encoding encoding, File file, String segmentation, IFilter filter, Boolean segmentBilingual) {
+    public static OkapiPack generatePack(Locale sourceLanguage, Locale targetLanguage, Encoding encoding, File file, String segmentation, IFilter filter, Boolean segmentBilingual, Boolean useSegmentation) {
         // Check inputs
         if (sourceLanguage == null)
             throw new IllegalArgumentException("Source language cannot be null");
