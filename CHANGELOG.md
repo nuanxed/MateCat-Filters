@@ -1,5 +1,11 @@
 # MateCat Filters Changelog
 
+## 2.2.0 (2024-02-20)
+
+* Upgraded to Okapi 1.46
+* Solved regressions, should behave the same as old version
+* Added xliff config options (possible to add ctype etc in the future)
+
 ## 2.1.0 (2023-05-15)
 
 * Upgraded to Java 11
