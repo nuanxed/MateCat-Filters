@@ -311,9 +311,7 @@ public class OkapiClient {
         // already segmented, so it's better to not segment further.
         // XLIFFs instead are already segmented, and segmenting them further causes
         // strange outputs.
-        if (!Format.isBilingual(format) || segmentBilingual) {
-            // TODO: NX: make segmentation into a param
-            // Also when not using segmentation I got <ept> tags instead of <g> tags, related?
+        if (!Format.isBilingual(format) || segmentBilingual && useSegmentation) {
             createSegmentationStep(sourceLanguage, segmentation, driver);
         }
 
