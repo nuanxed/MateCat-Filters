@@ -24,6 +24,7 @@ import net.sf.okapi.filters.table.TableFilter;
 import net.sf.okapi.steps.common.RawDocumentToFilterEventsStep;
 import net.sf.okapi.steps.rainbowkit.creation.ExtractionStep;
 import net.sf.okapi.steps.rainbowkit.postprocess.MergingStep;
+import net.sf.okapi.steps.rainbowkit.xliff.Options;
 import net.sf.okapi.steps.segmentation.SegmentationStep;
 import net.sf.okapi.steps.whitespacecorrection.WhitespaceCorrectionStep;
 import org.apache.commons.io.FileUtils;
@@ -207,6 +208,13 @@ public class OkapiClient {
         ExtractionStep extStep = new ExtractionStep();
         net.sf.okapi.steps.rainbowkit.creation.Parameters extParams = (net.sf.okapi.steps.rainbowkit.creation.Parameters) extStep.getParameters();
         extParams.setPackageName(OkapiPack.PACK_FILENAME);
+
+        // NX XLIFF creation options addition
+        Options writerOptions = new Options();
+        writerOptions.setPlaceholderMode(true);
+        writerOptions.setCopySource(true);
+        writerOptions.setIncludeCodeAttrs(true);
+        extParams.setWriterOptions(String.valueOf(writerOptions));
         return extStep;
     }
 
