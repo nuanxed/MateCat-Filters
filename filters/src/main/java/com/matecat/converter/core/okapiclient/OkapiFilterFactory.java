@@ -318,11 +318,6 @@ public class OkapiFilterFactory {
         // target segment including also <mrk> (that couldn't be computed because the <seg-source> was ignored. So it's
         // better to ignore <source> instead, and always use <seg-source> as default reference.
         params.setAlwaysUseSegSource(true);
-
-        // NX additions
-        params.setAllowEmptyTargets(false);
-        //params.setIncludeIts(true);
-        System.out.println("APPLY XLIFF FILTER: " + params);
         return filter;
     }
 
