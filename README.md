@@ -22,6 +22,10 @@ Use it:
 
 http://localhost:8732/zombie-cat
 
+## NX control the output format
+
+See here:
+filters/src/main/java/com/matecat/converter/core/okapiclient/OkapiClient.java
 
 ## Getting started
 
