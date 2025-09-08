@@ -212,7 +212,7 @@ public class OkapiClient {
         // NX XLIFF creation options addition
         Options writerOptions = new Options();
         // use g and x tags instead of bpt, ept
-        writerOptions.setPlaceholderMode(true);
+        writerOptions.setPlaceholderMode(false);
         // copies source to target
         writerOptions.setCopySource(true);
         // Will include ctype attributes if set to true
